@@ -44,7 +44,7 @@ const MoviesList = ({ query }) => {
     const totalPages = Math.ceil(totalResults / 30); // Adjust total pages accordingly
 
     return (
-        <div className="container mx-auto px-4 py-2">
+        <div className="container mx-auto px-2 lg:px-4 py-2">
             {/* Category Filter */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xs lg:text-lg font-bold">Movies & TV Shows</h2>
