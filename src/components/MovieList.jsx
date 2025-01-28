@@ -11,26 +11,26 @@ const MoviesList = ({ query }) => {
     const apiKey = process.env.REACT_APP_OMDB_API_KEY;
 
     useEffect(() => {
-        fetchMovies();
-    }, [query, type, page]);
-
-    const fetchMovies = async () => {
-        try {
-            const response = await axios.get(
-                `https://www.omdbapi.com/?s=${query || 'batman'}&type=${type}&page=${page}&apikey=${apiKey}`
-            );
-            if (response.data.Response === 'True') {
-                setMovies(response.data.Search);
-                setTotalResults(parseInt(response.data.totalResults, 20));
-            } else {
-                setMovies([]);
-                setTotalResults(0);
+        const fetchMovies = async () => {
+            try {
+                const response = await axios.get(
+                    `https://www.omdbapi.com/?s=${query || 'batman'}&type=${type}&page=${page}&apikey=${apiKey}`
+                );
+                if (response.data.Response === 'True') {
+                    setMovies(response.data.Search);
+                    setTotalResults(parseInt(response.data.totalResults, 10));
+                } else {
+                    setMovies([]);
+                    setTotalResults(0);
+                }
+            } catch (error) {
+                console.error('Error fetching movies:', error);
             }
-        } catch (error) {
-            console.error('Error fetching movies:', error);
-        }
-    };
-
+        };
+    
+        fetchMovies();
+    }, [query, type, page]); // ✅ Now all dependencies are included
+    
     const handleTypeChange = (newType) => {
         setType(newType);
         setPage(1); // Reset to first page when category changes
