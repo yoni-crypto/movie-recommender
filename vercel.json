@@ -1,11 +1,13 @@
 {
     "version": 2,
     "name": "movie-recommender",
-    
-    "rewrites": [
+    "builds": [
         {
-            "source": "/(.*)",
-            "destination": "/"
+            "src": "package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "build"
+            }
         }
     ],
     "routes": [
